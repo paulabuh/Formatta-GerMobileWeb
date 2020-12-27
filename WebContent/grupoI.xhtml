@@ -1,0 +1,165 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+	<pm:page
+		title="#{gerenciaBean.grupoSelecionado.numGrupo} - #{gerenciaBean.grupoSelecionado.descGrupo}">
+
+		<!-- Single page -->
+		<pm:view id="grupoI">
+			<pm:header
+				title="#{gerenciaBean.grupoSelecionado.numGrupo} - #{gerenciaBean.grupoSelecionado.descGrupo}"
+				style="font-size:4px">
+				<f:facet name="left">
+					<p:button value="Back" icon="back"
+						onclick="PrimeFaces.back();return false;" />
+				</f:facet>
+			</pm:header>
+
+			<pm:content>
+
+
+				<h:panelGrid id="header" columns="4"
+					style="text-align: center;overflow: hidden;font-weight: bold;font-size:12px">
+					<h:outputText value="" />
+					<h:outputText value="#{gerenciaBean.headerPer}" />
+					<h:outputText value="#{gerenciaBean.headerPerAnAnt}" />
+					<h:outputText value="#{gerenciaBean.headerPerAnt}" />
+
+				</h:panelGrid>
+				<h:panelGrid id="itens" columns="4"
+					style="text-align:right;overflow: hidden;font-size:12px">
+
+					<h:outputText value="Ctr realizados" />
+					<h:outputText value="#{gerenciaBean.ger.totCtrRealizados}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaTotCtrRealizados}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaTotCtrRealizados}">
+					</h:outputText>
+
+					<h:outputText value="Ctr envolvidos" />
+					<h:outputText value="#{gerenciaBean.ger.totCtrEnvolvidos}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaTotCtrEnvolvidos}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaTotCtrEnvolvidos}">
+					</h:outputText>
+
+					<h:outputText value="Ctr Cancelados" />
+					<h:outputText value="#{gerenciaBean.ger.totCtrCancelados}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaTotCtrCancelados}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaTotCtrCancelados}">
+					</h:outputText>
+
+
+					<h:outputText value="Dias Trabalhados" />
+					<h:outputText value="#{gerenciaBean.ger.diasTrabalhados}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaDiasTrabalhados}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaDiasTrabalhados}">
+					</h:outputText>
+
+					<h:outputText value="Media ctr/dia" />
+					<h:outputText value="#{gerenciaBean.ger.mediaContratos}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaMediaContratos}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaMediaContratos}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+
+					<h:outputText value="Ticket Medio" />
+					<h:outputText value="#{gerenciaBean.ger.mediaContratos}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaMediaContratos}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaMediaContratos}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+
+					<h:outputText value="Cob. Canceladas" />
+					<h:outputText value="#{gerenciaBean.ger.totCrCanceladas}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaTotCrCanceladas}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaTotCrCanceladas}">
+					</h:outputText>
+
+					<h:outputText value="Clientes Novos" />
+					<h:outputText value="#{gerenciaBean.ger.clientesNovos}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaClientesNovos}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaClientesNovos}">
+					</h:outputText>
+
+					<h:outputText value="Clientes Ativos" />
+					<h:outputText value="#{gerenciaBean.ger.clientesAtivo}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaClientesAtivo}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaClientesAtivo}">
+					</h:outputText>
+
+					<h:outputText value="Total Clientes" />
+					<h:outputText value="#{gerenciaBean.ger.clientes}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaClientes}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaClientes}">
+					</h:outputText>
+
+					<h:outputText value="Funcionarios" />
+					<h:outputText value="#{gerenciaBean.ger.qtdeFunc}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaQtdeFunc}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaQtdeFunc}">
+					</h:outputText>
+
+					<h:outputText value="Fat/Funcionario" />
+					<h:outputText value="#{gerenciaBean.ger.faturamentoFunc}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaFaturamentoFunc}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaFaturamentoFunc}">
+						<f:convertNumber pattern="0.00" />
+					</h:outputText>
+					
+					<h:outputText value="Ctr Zerados" />
+					<h:outputText value="#{gerenciaBean.ger.ctrZeradosDev}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.anoaCtrZeradosDev}">
+					</h:outputText>
+					<h:outputText value="#{gerenciaBean.ger.mesaCtrZeradosDev}">
+					</h:outputText>
+
+
+				</h:panelGrid>
+
+
+
+
+
+
+			</pm:content>
+
+		</pm:view>
+
+	</pm:page>
+
+</f:view>

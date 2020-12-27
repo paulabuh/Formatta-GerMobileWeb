@@ -1,0 +1,263 @@
+package br.com.formattanegocios.util;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import br.com.formattanegocios.dao.DAOFactory;
+import br.com.formattanegocios.dao.IDao;
+import br.com.formattanegocios.model.GerencialDiario;
+import br.com.formattanegocios.model.Loja;
+
+public class UtilGerencialDiario {
+
+	public static List<GerencialDiario> getGerencial(String pArquivo)
+			throws IOException {
+
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObjAux = null;
+		JSONObject gerJson = null;
+		JSONArray gerenciaisJson = null;
+		FileReader fileJson = null;
+		List<GerencialDiario> gerenciais = new ArrayList<GerencialDiario>();
+		GerencialDiario ger = null;
+		try {
+			try {
+				fileJson = new FileReader(pArquivo);
+				Object obj = parser.parse(fileJson);
+
+				// o que eu salvei no delphi foi um array
+				gerenciaisJson = (JSONArray) obj;
+
+				// System.out.println(gerenciaisJson.toJSONString());
+
+				// para cada item do array- que é um gerencial
+				for (int i = 0; i < gerenciaisJson.size(); i++) {
+
+					// cada gerencial completo - com o cabeçalho do delphi
+					jsonObjAux = (JSONObject) gerenciaisJson.get(i);
+
+					// os dados do gerencial em si sem o cabeçalho delphi
+					gerJson = (JSONObject) jsonObjAux.get("fields");
+
+					ger = new GerencialDiario();
+
+					Date dtGer = DateConverter.javaDate(Double
+							.parseDouble(gerJson.get("FDtAnalise").toString()));
+
+					ger.setDtAnalise(dtGer);
+					ger.setTotCtrRealizados(Integer.parseInt(gerJson.get(
+							"FTotCtrRealizados").toString()));
+					ger.setTotCtrEnvolvidos(Integer.parseInt(gerJson.get(
+							"FTotCtrEnvolvidos").toString()));
+					ger.setTotCtrCancelados(Integer.parseInt(gerJson.get(
+							"FTotCtrCancelados").toString()));
+					ger.setTotCrCanceladas(Integer.parseInt(gerJson.get(
+							"FTotCrCanceladas").toString()));
+					ger.setMesaDiasTrabalhados(Integer.parseInt(gerJson.get(
+							"FDiasTrabalhados").toString()));
+					ger.setMediaContratos(Double.parseDouble(gerJson.get(
+							"FMediaContratos").toString()));
+					ger.setTicketMedio(Double.parseDouble(gerJson.get(
+							"FTicketMedio").toString()));
+					ger.setClientes(Integer.parseInt(gerJson.get("FClientes")
+							.toString()));
+					ger.setClientesNovos(Integer.parseInt(gerJson.get(
+							"FClientesNovos").toString()));
+					ger.setClientesAtivo(Integer.parseInt(gerJson.get(
+							"FClientesAtivo").toString()));
+					ger.setTicketMedioFunc(Double.parseDouble(gerJson.get(
+							"FTicketMedioFun").toString()));
+					ger.setQtdeFunc(Integer.parseInt(gerJson.get("FQtdeFun")
+							.toString()));
+					ger.setMesaTotCtrRealizados(Integer.parseInt(gerJson.get(
+							"FMesaTotCtrRealizados").toString()));
+					ger.setMesaTotCtrEnvolvidos(Integer.parseInt(gerJson.get(
+							"FMesaTotCtrEnvolvidos").toString()));
+					ger.setMesaTotCtrCancelados(Integer.parseInt(gerJson.get(
+							"FMesaTotCtrCancelados").toString()));
+					ger.setMesaTotCrCanceladas(Integer.parseInt(gerJson.get(
+							"FMesaTotCrCanceladas").toString()));
+					ger.setMesaDiasTrabalhados(Integer.parseInt(gerJson.get(
+							"FMesaDiasTrabalhados").toString()));
+					ger.setMesaMediaContratos(Double.parseDouble(gerJson.get(
+							"FMesaMediaContratos").toString()));
+					ger.setMesaTicketMedio(Double.parseDouble(gerJson.get(
+							"FMesaTicketMedio").toString()));
+					ger.setMesaClientes(Integer.parseInt(gerJson.get(
+							"FMesaClientes").toString()));
+					ger.setMesaClientesNovos(Integer.parseInt(gerJson.get(
+							"FMesaClientesNovos").toString()));
+					ger.setMesaClientesAtivo(Integer.parseInt(gerJson.get(
+							"FMesaClientesAtivo").toString()));
+					ger.setMesaTicketMedioFunc(Double.parseDouble(gerJson.get(
+							"FMesaTicketMedioFun").toString()));
+					ger.setMesaQtdeFunc(Integer.parseInt(gerJson.get(
+							"FMesaQtdeFunc").toString()));
+					ger.setAnoaTotCtrRealizados(Integer.parseInt(gerJson.get(
+							"FAnoaTotCtrRealizados").toString()));
+					ger.setAnoaTotCtrEnvolvidos(Integer.parseInt(gerJson.get(
+							"FAnoaTotCtrEnvolvidos").toString()));
+					ger.setAnoaTotCtrCancelados(Integer.parseInt(gerJson.get(
+							"FAnoaTotCtrCancelados").toString()));
+					ger.setAnoaTotCrCanceladas(Integer.parseInt(gerJson.get(
+							"FAnoaTotCrCanceladas").toString()));
+					ger.setAnoaDiasTrabalhados(Integer.parseInt(gerJson.get(
+							"FAnoaDiasTrabalhados").toString()));
+					ger.setAnoaMediaContratos(Double.parseDouble(gerJson.get(
+							"FAnoaMediaContratos").toString()));
+					ger.setAnoaTicketMedio(Double.parseDouble(gerJson.get(
+							"FAnoaTicketMedio").toString()));
+					ger.setAnoaClientes(Integer.parseInt(gerJson.get(
+							"FAnoaClientes").toString()));
+					ger.setAnoaClientesNovos(Integer.parseInt(gerJson.get(
+							"FAnoaClientesNovos").toString()));
+					ger.setAnoaClientesAtivo(Integer.parseInt(gerJson.get(
+							"FAnoaClientesAtivo").toString()));
+					ger.setAnoaTicketMedioFunc(Double.parseDouble(gerJson.get(
+							"FAnoaTicketMedioFun").toString()));
+					ger.setFaturamentoFunc(Double.parseDouble(gerJson.get(
+							"FFaturamentoFun").toString()));
+					ger.setMesaFaturamentoFunc(Double.parseDouble(gerJson.get(
+							"FMesaFaturamentoFun").toString()));
+					ger.setAnoaFaturamentoFunc(Double.parseDouble(gerJson.get(
+							"FAnoaFaturamentoFun").toString()));
+					ger.setAnoaQtdeFunc(Integer.parseInt(gerJson.get(
+							"FAnoaQtdeFunc").toString()));
+					ger.setInvestimentos(Double.parseDouble(gerJson.get(
+							"FInvestimentos").toString()));
+					ger.setInvestimentosCustoat(Double.parseDouble(gerJson.get(
+							"FInvestimentosCustoat").toString()));
+					ger.setEquipPerdidos(Double.parseDouble(gerJson.get(
+							"FEquipPerdidos").toString()));
+					ger.setEquipPerdidosCustoat(Double.parseDouble(gerJson.get(
+							"FEquipPerdidosCustoat").toString()));
+					ger.setInventario(Double.parseDouble(gerJson.get(
+							"FInventario").toString()));
+					ger.setInventarioCustoatual(Double.parseDouble(gerJson.get(
+							"FInventarioCustoatual").toString()));
+					ger.setLocacoes(Double.parseDouble(gerJson.get("FLocacoes")
+							.toString()));
+					ger.setAdicional(Double.parseDouble(gerJson.get(
+							"FAdicional").toString()));
+					ger.setBolocador(Double.parseDouble(gerJson.get(
+							"FBolocador").toString()));
+					ger.setBolocatario(Double.parseDouble(gerJson.get(
+							"FBolocatario").toString()));
+					ger.setVendasAcessorio(Double.parseDouble(gerJson.get(
+							"FVendasAcessorio").toString()));
+					ger.setVendasEquipamentos(Double.parseDouble(gerJson.get(
+							"FVendasEquipamentos").toString()));
+					ger.setManutencao(Double.parseDouble(gerJson.get(
+							"FManutencao").toString()));
+					ger.setBolocadorTot(Double.parseDouble(gerJson.get(
+							"FBolocadorTot").toString()));
+					ger.setBolocatarioTot(Double.parseDouble(gerJson.get(
+							"FBolocatarioTot").toString()));
+					ger.setDescontoctrencer(Double.parseDouble(gerJson.get(
+							"FDescontoctrencer").toString()));
+					ger.setRoyalLocacoes(Double.parseDouble(gerJson.get(
+							"FRoyalLocacoes").toString()));
+					ger.setRoyalAdicional(Double.parseDouble(gerJson.get(
+							"FRoyalAdicional").toString()));
+					ger.setRoyalBolocador(Double.parseDouble(gerJson.get(
+							"FRoyalBolocador").toString()));
+					ger.setRoyalBolocatario(Double.parseDouble(gerJson.get(
+							"FRoyalBolocatario").toString()));
+					ger.setRoyalVendasAcessorio(Double.parseDouble(gerJson.get(
+							"FRoyalVendasAcessorio").toString()));
+					ger.setRoyalVendasEquipamen(Double.parseDouble(gerJson.get(
+							"FRoyalVendasEquipamen").toString()));
+					ger.setRoyalManutencao(Double.parseDouble(gerJson.get(
+							"FRoyalManutencao").toString()));
+					ger.setRoyalDescontoctrence(Double.parseDouble(gerJson.get(
+							"FRoyalDescontoctrence").toString()));
+					ger.setFaturamentoTotal(Double.parseDouble(gerJson.get(
+							"FFaturamentoTotal").toString()));
+					ger.setRoayltiesTotal(Double.parseDouble(gerJson.get(
+							"FRoayltiesTotal").toString()));
+					ger.setTotalReinvestimento(Double.parseDouble(gerJson.get(
+							"FTotalReinvestimento").toString()));
+					ger.setTotalRecebimento(Double.parseDouble(gerJson.get(
+							"FTotalRecebimento").toString()));
+					ger.setTotalDespesas(Double.parseDouble(gerJson.get(
+							"FTotalDespesas").toString()));
+					ger.setFinanEquiptos(Double.parseDouble(gerJson.get(
+							"FFinanEquiptos").toString()));
+					ger.setFinanUtensilios(Double.parseDouble(gerJson.get(
+							"FFinanUtensilios").toString()));
+					ger.setDevAporteCapital(Double.parseDouble(gerJson.get(
+							"FDevAporteCapital").toString()));
+					ger.setDevEmprestimos(Double.parseDouble(gerJson.get(
+							"FDevEmprestimos").toString()));
+					ger.setCpAVencer(Double.parseDouble(gerJson.get(
+							"FCpAVencer").toString()));
+					ger.setCpAtraso30(Double.parseDouble(gerJson.get(
+							"FCpAtraso30").toString()));
+					ger.setCpAtraso60(Double.parseDouble(gerJson.get(
+							"FCpAtraso60").toString()));
+					ger.setCpAtraso90(Double.parseDouble(gerJson.get(
+							"FCpAtraso90").toString()));
+					ger.setCpAtrasoMais90(Double.parseDouble(gerJson.get(
+							"FCpAtrasoMais90").toString()));
+					ger.setCrPotEmitir(Double.parseDouble(gerJson.get(
+							"FCrPotEmitir").toString()));
+					ger.setCrEmitidas(Double.parseDouble(gerJson.get(
+							"FCrEmitidas").toString()));
+					ger.setCrAEmitir(Double.parseDouble(gerJson.get(
+							"FCrAEmitir").toString()));
+					ger.setCrInadimp91120(Double.parseDouble(gerJson.get(
+							"FCrInadimp91120").toString()));
+					ger.setFuncdoPerdAcm(Double.parseDouble(gerJson.get(
+							"FFundoPerdAcm").toString()));
+					ger.setCtrZeradosDev(Integer.parseInt(gerJson.get(
+							"FCtrZeradosDev").toString()));
+					ger.setMesaCtrZeradosDev(Integer.parseInt(gerJson.get(
+							"FMesaCtrZeradosDev").toString()));
+					ger.setAnoaCtrZeradosDev(Integer.parseInt(gerJson.get(
+							"FAnoaCtrZeradosDev").toString()));
+
+					// pega idLoja
+					IDao<Loja> lojaDao = DAOFactory.getLojaDao();
+					int idLoja = lojaDao
+							.getAll("codloja = '"
+									+ gerJson.get("FCodloja").toString() + "'")
+							.get(0).getId();
+					lojaDao = null;
+
+					ger.setIdloja(idLoja);
+
+					gerenciais.add(ger);
+				}
+
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+				System.out.println("Erro no arquivo!");
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			fileJson.close();
+			fileJson = null;
+			gerenciaisJson = null;
+			parser = null;
+			jsonObjAux = null;
+			gerJson = null;
+		}
+		return gerenciais;
+
+	}
+}

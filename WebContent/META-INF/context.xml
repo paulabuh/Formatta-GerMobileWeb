@@ -1,0 +1,18 @@
+ <Context path="/EProtocolo">
+  <Resource 
+	  maxActive="0" 
+	  minActive="20" 
+	  driverClassName="org.firebirdsql.jdbc.FBDriver" 
+	  removeAbandonedTimeout="30" 
+	  removeAbandoned="true" 
+	  password="ftt1773" 
+	  name="jdbc/FttWS" 
+	  factory="org.apache.commons.dbcp.BasicDataSourceFactory" 
+	  username="FTT" 
+	  maxIdle="20" 
+	  logAbandoned="true" 
+	  auth="Container" 
+	  maxWait="30000" 
+	  url="jdbc:firebirdsql:localhost:GERMOBILE" 
+	  type="javax.sql.DataSource" /> 
+  </Context>

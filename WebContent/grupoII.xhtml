@@ -1,0 +1,88 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+	<pm:page
+		title="#{gerenciaBean.grupoSelecionado.numGrupo} - #{gerenciaBean.grupoSelecionado.descGrupo}">
+
+		<!-- Single page -->
+		<pm:view id="grupoII">
+			<pm:header
+				title="#{gerenciaBean.grupoSelecionado.numGrupo} - #{gerenciaBean.grupoSelecionado.descGrupo}"
+				style="font-size:4px">
+				<f:facet name="left">
+					<p:button value="Back" icon="back"
+						onclick="PrimeFaces.back();return false;" />
+				</f:facet>
+			</pm:header>
+
+			<pm:content>
+
+				<p:dataTable id="fatTable" style="text-align:center;font-size:12px"
+					value="#{gerenciaBean.ger.tabGrupoII.itens}" var="fat">
+
+					<f:attribute name="columnToggle" value="true" />
+					<f:attribute name="btnText" value="Colunas..." />
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column headerText="" />
+							<p:column colspan="2" headerText="Faturamento">
+								<f:attribute name="priority" value="1" />
+							</p:column>
+							<p:column colspan="2" headerText="Royalties">
+								<f:attribute name="priority" value="2" />
+							</p:column>
+						</p:row>
+					</p:columnGroup>
+
+					<p:column
+						headerText="#{gerenciaBean.ger.tabGrupoII.header.header1}">
+						<h:outputText value="#{fat.descricao}" />
+					</p:column>
+
+					<p:column
+						headerText="#{gerenciaBean.ger.tabGrupoII.header.header2}"
+						style="text-align: right;">
+						<h:outputText value="#{fat.valor1}">
+							<f:convertNumber pattern="0.00" />
+						</h:outputText>
+					</p:column>
+
+					<p:column
+						headerText="#{gerenciaBean.ger.tabGrupoII.header.header3}">
+						<h:outputText value="#{fat.valor2}">
+							<f:convertNumber pattern="0.00" />
+						</h:outputText>
+					</p:column>
+
+					<p:column
+						headerText="#{gerenciaBean.ger.tabGrupoII.header.header4}">
+						<h:outputText value="#{fat.valor3}">
+							<f:convertNumber integerOnly="true" pattern="0" />
+						</h:outputText>
+					</p:column>
+
+					<p:column
+						headerText="#{gerenciaBean.ger.tabGrupoII.header.header5}">
+						<h:outputText value="#{fat.valor4}">
+							<f:convertNumber pattern="0.00" />
+						</h:outputText>
+					</p:column>
+
+
+				</p:dataTable>
+
+
+
+
+			</pm:content>
+
+		</pm:view>
+
+	</pm:page>
+
+</f:view>

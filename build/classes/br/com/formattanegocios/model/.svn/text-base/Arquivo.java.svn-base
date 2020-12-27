@@ -1,0 +1,23 @@
+package br.com.formattanegocios.model;
+
+public class Arquivo {
+	private byte[] arquivo;
+	private String nomeArq;
+
+	public byte[] getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(byte[] arquivo) {
+		this.arquivo = arquivo;
+	}
+
+	public String getNomeArq() {
+		return nomeArq;
+	}
+
+	public void setNomeArq(String nomeArq) {
+		this.nomeArq = nomeArq;
+	}
+
+}

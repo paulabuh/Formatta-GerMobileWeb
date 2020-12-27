@@ -1,0 +1,290 @@
+package br.com.formattanegocios.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import br.com.formattanegocios.jdbc.ConnectionFactory;
+import br.com.formattanegocios.model.GerencialDiario;
+import br.com.formattanegocios.util.Util;
+
+public class GerencialDiarioDao implements IDao<GerencialDiario> {
+
+	@Override
+	public GerencialDiario getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<GerencialDiario> getAll(String pCondicao) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean insert(GerencialDiario pModel) {
+
+		Connection connection;
+		PreparedStatement pstmt;
+		pstmt = null;
+		connection = null;
+		boolean resultado = false;
+
+		try {
+
+			// connection = ConnectionFactory.getInstance().getConnection();
+			connection = ConnectionFactory.getPoolConnection();
+			StringBuilder sql = new StringBuilder();
+			SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+
+			sql.append("update or insert into TB_GERENCIAL_DIARIO ");
+			sql.append("( IDLOJA, DT_ANALISE, TOT_CTR_REALIZADOS, TOT_CTR_ENVOLVIDOS,");
+			sql.append("TOT_CTR_CANCELADOS, TOT_CR_CANCELADAS, DIAS_TRABALHADOS, MEDIA_CONTRATOS,");
+			sql.append("TICKET_MEDIO, CLIENTES, CLIENTES_NOVOS, CLIENTES_ATIVO, TICKET_MEDIO_FUN,");
+			sql.append("QTDE_FUN, MESA_TOT_CTR_REALIZADOS, MESA_TOT_CTR_ENVOLVIDOS,");
+			sql.append("MESA_TOT_CTR_CANCELADOS, MESA_TOT_CR_CANCELADAS, MESA_DIAS_TRABALHADOS,");
+			sql.append("MESA_MEDIA_CONTRATOS, MESA_TICKET_MEDIO, MESA_CLIENTES, MESA_CLIENTES_NOVOS,");
+			sql.append("MESA_CLIENTES_ATIVO, MESA_TICKET_MEDIO_FUN, MESA_QTDE_FUNC,");
+			sql.append("ANOA_TOT_CTR_REALIZADOS, ANOA_TOT_CTR_ENVOLVIDOS, ANOA_TOT_CTR_CANCELADOS,");
+			sql.append("ANOA_TOT_CR_CANCELADAS, ANOA_DIAS_TRABALHADOS, ANOA_MEDIA_CONTRATOS,");
+			sql.append("ANOA_TICKET_MEDIO, ANOA_CLIENTES, ANOA_CLIENTES_NOVOS, ANOA_CLIENTES_ATIVO,");
+			sql.append("ANOA_TICKET_MEDIO_FUN, FATURAMENTO_FUN, MESA_FATURAMENTO_FUN,");
+			sql.append("ANOA_FATURAMENTO_FUN, ANOA_QTDE_FUNC, INVESTIMENTOS,");
+			sql.append("INVESTIMENTOS_CUSTOATUAL, EQUIP_PERDIDOS, EQUIP_PERDIDOS_CUSTOATUAL,");
+			sql.append("INVENTARIO, INVENTARIO_CUSTOATUAL, LOCACOES, ADICIONAL, BOLOCADOR,");
+			sql.append("BOLOCATARIO, VENDAS_ACESSORIO, VENDAS_EQUIPAMENTOS, MANUTENCAO,");
+			sql.append("BOLOCADOR_TOT, BOLOCATARIO_TOT, DESCONTOCTRENCER, ROYAL_LOCACOES,");
+			sql.append("ROYAL_ADICIONAL, ROYAL_BOLOCADOR, ROYAL_BOLOCATARIO, ROYAL_VENDAS_ACESSORIO,");
+			sql.append("ROYAL_VENDAS_EQUIPAMENTOS, ROYAL_MANUTENCAO, ROYAL_DESCONTOCTRENCER,");
+			sql.append("FATURAMENTO_TOTAL, ROAYLTIES_TOTAL, TOTAL_REINVESTIMENTO, TOTAL_RECEBIMENTO,");
+			sql.append("TOTAL_DESPESAS, FINAN_EQUIPTOS, FINAN_UTENSILIOS, DEV_APORTE_CAPITAL,");
+			sql.append("DEV_EMPRESTIMOS, CP_A_VENCER, CP_ATRASO_30, CP_ATRASO_60, CP_ATRASO_90,");
+			sql.append("CP_ATRASO_MAIS_90, CR_POT_EMITIR, CR_EMITIDAS, CR_A_EMITIR,");
+			sql.append("CR_INADIMP_91_120, FUNDO_PERD_ACM, CTR_ZERADOS_DEV, MESA_CTR_ZERADOS_DEV,");
+			sql.append("ANOA_CTR_ZERADOS_DEV) ");
+			sql.append(" values ( ?, ?, ? , ? , ? , ? ,");
+			sql.append("  ?  , ? , ? , ? ,?  , ? , ? , ? ,");
+			sql.append("  ?  , ? , ?  , ? , ?  , ? , ?  , ? , ? ,");
+			sql.append("  ?  , ? , ? , ?  , ? , ?  , ? , ?  , ? ,");
+			sql.append("  ?  , ? , ? , ?  , ? , ? ,");
+			sql.append("  ?  , ? , ? , ?  , ? , ? ,");
+			sql.append("  ?  , ? , ? , ?  , ? , ? , ? ,");
+			sql.append("  ?  , ? , ? , ?  , ? , ? ,");
+			sql.append("  ?  , ? , ? ,  ?  , ? ,");
+			sql.append("  ?  , ? , ?  , ? , ? ,");
+			sql.append("  ?  , ? , ? , ?  , ? , ? ,");
+			sql.append("  ?  , ? , ? , ? ,  ?  , ? , ? , ? ,");
+			sql.append("  ?  , ? , ? , ?  , ? , ? )");
+			sql.append(" matching (IDLOJA, DT_ANALISE)");
+
+			pstmt = connection.prepareStatement(sql.toString());
+
+			pstmt.setDouble(1, pModel.getIdloja());
+			pstmt.setString(2, sd.format(pModel.getDtAnalise()));
+
+			pstmt.setDouble(3, pModel.getTotCtrRealizados());
+
+			pstmt.setDouble(4, pModel.getTotCtrEnvolvidos());
+
+			pstmt.setDouble(5, pModel.getTotCtrCancelados());
+
+			pstmt.setDouble(6, pModel.getTotCrCanceladas());
+
+			pstmt.setDouble(7, pModel.getMesaDiasTrabalhados());
+
+			pstmt.setDouble(8, pModel.getMediaContratos());
+
+			pstmt.setDouble(9, pModel.getTicketMedio());
+
+			pstmt.setDouble(10, pModel.getClientes());
+
+			pstmt.setDouble(11, pModel.getClientesNovos());
+
+			pstmt.setDouble(12, pModel.getClientesAtivo());
+
+			pstmt.setDouble(13, pModel.getTicketMedioFunc());
+
+			pstmt.setDouble(14, pModel.getQtdeFunc());
+
+			pstmt.setDouble(15, pModel.getMesaTotCtrRealizados());
+
+			pstmt.setDouble(16, pModel.getMesaTotCtrEnvolvidos());
+
+			pstmt.setDouble(17, pModel.getMesaTotCtrCancelados());
+
+			pstmt.setDouble(18, pModel.getMesaTotCrCanceladas());
+
+			pstmt.setDouble(19, pModel.getMesaDiasTrabalhados());
+
+			pstmt.setDouble(20, pModel.getMesaMediaContratos());
+
+			pstmt.setDouble(21, pModel.getMesaTicketMedio());
+
+			pstmt.setDouble(22, pModel.getMesaClientes());
+
+			pstmt.setDouble(23, pModel.getMesaClientesNovos());
+
+			pstmt.setDouble(24, pModel.getMesaClientesAtivo());
+
+			pstmt.setDouble(25, pModel.getMesaTicketMedioFunc());
+
+			pstmt.setDouble(26, pModel.getMesaQtdeFunc());
+
+			pstmt.setDouble(27, pModel.getAnoaTotCtrRealizados());
+
+			pstmt.setDouble(28, pModel.getAnoaTotCtrEnvolvidos());
+
+			pstmt.setDouble(29, pModel.getAnoaTotCtrCancelados());
+
+			pstmt.setDouble(30, pModel.getAnoaTotCrCanceladas());
+
+			pstmt.setDouble(31, pModel.getAnoaDiasTrabalhados());
+
+			pstmt.setDouble(32, pModel.getAnoaMediaContratos());
+
+			pstmt.setDouble(33, pModel.getAnoaTicketMedio());
+
+			pstmt.setDouble(34, pModel.getAnoaClientes());
+
+			pstmt.setDouble(35, pModel.getAnoaClientesNovos());
+
+			pstmt.setDouble(36, pModel.getAnoaClientesAtivo());
+
+			pstmt.setDouble(37, pModel.getAnoaTicketMedioFunc());
+
+			pstmt.setDouble(38, pModel.getFaturamentoFunc());
+
+			pstmt.setDouble(39, pModel.getMesaFaturamentoFunc());
+
+			pstmt.setDouble(40, pModel.getAnoaFaturamentoFunc());
+
+			pstmt.setDouble(41, pModel.getAnoaQtdeFunc());
+
+			pstmt.setDouble(42, pModel.getInvestimentos());
+
+			pstmt.setDouble(43, pModel.getInvestimentosCustoat());
+
+			pstmt.setDouble(44, pModel.getEquipPerdidos());
+
+			pstmt.setDouble(45, pModel.getEquipPerdidosCustoat());
+
+			pstmt.setDouble(46, pModel.getInventario());
+
+			pstmt.setDouble(47, pModel.getInventarioCustoatual());
+
+			pstmt.setDouble(48, pModel.getLocacoes());
+
+			pstmt.setDouble(49, pModel.getAdicional());
+
+			pstmt.setDouble(50, pModel.getBolocador());
+
+			pstmt.setDouble(51, pModel.getBolocatario());
+
+			pstmt.setDouble(52, pModel.getVendasAcessorio());
+
+			pstmt.setDouble(53, pModel.getVendasEquipamentos());
+
+			pstmt.setDouble(54, pModel.getManutencao());
+
+			pstmt.setDouble(55, pModel.getBolocadorTot());
+
+			pstmt.setDouble(56, pModel.getBolocatarioTot());
+
+			pstmt.setDouble(57, pModel.getDescontoctrencer());
+
+			pstmt.setDouble(58, pModel.getRoyalLocacoes());
+
+			pstmt.setDouble(59, pModel.getRoyalAdicional());
+
+			pstmt.setDouble(60, pModel.getRoyalBolocador());
+
+			pstmt.setDouble(61, pModel.getRoyalBolocatario());
+
+			pstmt.setDouble(62, pModel.getRoyalVendasAcessorio());
+
+			pstmt.setDouble(63, pModel.getRoyalVendasEquipamen());
+
+			pstmt.setDouble(64, pModel.getRoyalManutencao());
+
+			pstmt.setDouble(65, pModel.getRoyalDescontoctrence());
+
+			pstmt.setDouble(66, pModel.getFaturamentoTotal());
+
+			pstmt.setDouble(67, pModel.getRoayltiesTotal());
+
+			pstmt.setDouble(68, pModel.getTotalReinvestimento());
+
+			pstmt.setDouble(69, pModel.getTotalRecebimento());
+
+			pstmt.setDouble(70, pModel.getTotalDespesas());
+
+			pstmt.setDouble(71, pModel.getFinanEquiptos());
+
+			pstmt.setDouble(72, pModel.getFinanUtensilios());
+
+			pstmt.setDouble(73, pModel.getDevAporteCapital());
+
+			pstmt.setDouble(74, pModel.getDevEmprestimos());
+
+			pstmt.setDouble(75, pModel.getCpAVencer());
+
+			pstmt.setDouble(76, pModel.getCpAtraso30());
+
+			pstmt.setDouble(77, pModel.getCpAtraso60());
+
+			pstmt.setDouble(78, pModel.getCpAtraso90());
+
+			pstmt.setDouble(79, pModel.getCpAtrasoMais90());
+
+			pstmt.setDouble(80, pModel.getCrPotEmitir());
+
+			pstmt.setDouble(81, pModel.getCrEmitidas());
+
+			pstmt.setDouble(82, pModel.getCrAEmitir());
+
+			pstmt.setDouble(83, pModel.getCrInadimp91120());
+
+			pstmt.setDouble(84, pModel.getFuncdoPerdAcm());
+
+			pstmt.setDouble(85, pModel.getCtrZeradosDev());
+
+			pstmt.setDouble(86, pModel.getMesaCtrZeradosDev());
+
+			pstmt.setDouble(87, pModel.getAnoaCtrZeradosDev());
+
+			pstmt.executeUpdate();
+			resultado = true;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			Util.close(pstmt, connection);
+
+			pstmt = null;
+			connection = null;
+		}
+
+		return resultado;
+
+	}
+
+	@Override
+	public boolean delete(GerencialDiario pModel) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean update(GerencialDiario pModel) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

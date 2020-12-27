@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/ProjetosJava/!svn/ver/1268/WSGerMobile/src/br/com/formattanegocios/dao
+END
+IDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/ProjetosJava/!svn/ver/1268/WSGerMobile/src/br/com/formattanegocios/dao/IDao.java
+END
+DAOFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/ProjetosJava/!svn/ver/1268/WSGerMobile/src/br/com/formattanegocios/dao/DAOFactory.java
+END
+GerencialDiarioDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/ProjetosJava/!svn/ver/1268/WSGerMobile/src/br/com/formattanegocios/dao/GerencialDiarioDao.java
+END
+LojaDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/ProjetosJava/!svn/ver/1268/WSGerMobile/src/br/com/formattanegocios/dao/LojaDao.java
+END

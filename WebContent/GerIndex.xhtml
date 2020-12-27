@@ -1,0 +1,93 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+	<pm:page title="Gerencial Diario">
+
+
+		<f:facet name="postinit">
+			<link rel="stylesheet"
+				href="#{request.contextPath}/javax.faces.resource/calendar/calendar.css.jsf?ln=primefaces-mobile" />
+			<h:outputScript library="primefaces-mobile"
+				name="calendar/calendar.js" />
+
+
+			<script type="text/javascript">
+				(function($) {
+					$.mobiscroll.i18n['pt_BR'] = $.extend(
+							$.mobiscroll.i18n['pt_BR'], {
+								dateFormat : 'dd/mm/yy',
+								dateOrder : 'ddMMyy',
+								dayNames : [ 'Domingo', 'Segunda-feira',
+										'Terça-feira', 'Quarta-feira',
+										'Quinta-feira', 'Sexta-feira',
+										'Sábado' ],
+								dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua',
+										'Qui', 'Sex', 'Sáb' ],
+								dayText : 'Dia',
+								hourText : 'Hora',
+								minuteText : 'Minutos',
+								monthNames : [ 'Janeiro', 'Fevereiro',
+										'Março', 'Abril', 'Maio', 'Junho',
+										'Julho', 'Agosto', 'Setembro',
+										'Outubro', 'Novembro', 'Dezembro' ],
+								monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr',
+										'Mai', 'Jun', 'Jul', 'Ago', 'Set',
+										'Out', 'Nov', 'Dez' ],
+								monthText : 'Mês',
+								secText : 'Segundo',
+								timeFormat : 'HH:ii',
+								timeWheels : 'HHii',
+								yearText : 'Ano',
+								setText : 'Selecionar',
+								cancelText : 'Cancelar',
+								nowText : 'Agora'
+							});
+				})(jQuery);
+			</script>
+		</f:facet>
+
+		<!-- Single page -->
+		<pm:view id="singlePage">
+			<pm:header title="Gerencial Casa">
+
+				<h:panelGrid columns="3">
+					<p:button value="Lojas" icon="bars" href="LojasSelected.jsf" />
+
+					
+					<h:form id="calendarForm">
+						<p:calendar id="dtger" value="#{gerenciaBean.dtFimGerencial}"
+							locale="pt_BR" size="10" />
+					</h:form>
+					
+					<p:commandButton value="OK"  icon="check" update="calendarForm"
+						actionListener="#{gerenciaBean.gerarGerencial}" />
+				</h:panelGrid>
+
+			</pm:header>
+
+			<pm:content>
+				<h:form id="groupsForm">
+					<p:dataList value="#{gerenciaBean.gruposGer}" var="group">
+						<p:column>
+							<p:commandLink value="#{group.numGrupo} - #{group.descGrupo}"
+								action="#{group.getLinkPg}" ajax="false">
+								<f:setPropertyActionListener value="#{group}"
+									target="#{gerenciaBean.grupoSelecionado}" />
+							</p:commandLink>
+
+						</p:column>
+					</p:dataList>
+				</h:form>
+
+			</pm:content>
+
+		</pm:view>
+
+	</pm:page>
+
+</f:view>

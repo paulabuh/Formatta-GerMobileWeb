@@ -1,0 +1,62 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile" contentType="text/html"
+	renderKitId="PRIMEFACES_MOBILE">
+
+	<pm:page title="Lojas">
+
+		<!-- Single page -->
+		<pm:view id="Lojas">
+
+
+
+			<pm:header title="Lojas">
+				<f:facet name="left">
+					<p:button value="Back" icon="back"
+						onclick="PrimeFaces.back();return false;" />
+				</f:facet>
+
+				<f:facet name="right">
+					<h:commandButton value="Salvar" icon="check" onclick="GerIndex" ajax="false"></h:commandButton>
+				</f:facet>
+			</pm:header>
+
+			<pm:content>
+				<h3>Selecione as lojas desejadas</h3>
+
+				<p:dataList value="#{gerenciaBean.lojas}" var="loja">
+					<f:attribute name="filter" value="true" />
+					<f:attribute name="autoDividers" value="true" />
+					<p:column>
+						<h:form id="LojasForm">
+
+							<p:selectBooleanCheckbox id="z" value="#{loja.selecionada}"
+								itemLabel="#{loja.apelido} - #{loja.codLoja}">
+							</p:selectBooleanCheckbox>
+
+							
+						</h:form>
+
+					</p:column>
+				</p:dataList>
+
+
+
+
+
+				<h:commandButton value="Salvar" icon="check" update="LojasForm"></h:commandButton>
+
+
+			</pm:content>
+
+
+
+
+		</pm:view>
+
+	</pm:page>
+
+</f:view>
